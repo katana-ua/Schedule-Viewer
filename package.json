@@ -1,0 +1,16 @@
+{
+  "name": "schedule",
+  "version": "1.0.0",
+  "description": "schedule viewer",
+  "main": "index.html",
+  "dependencies": {
+    "angular": "^1.5.3",
+    "bootstrap": "^3.3.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "katana_ua",
+  "license": "MIT"
+}

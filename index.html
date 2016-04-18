@@ -71,43 +71,99 @@
       </header>
 
       <section class="container">
-         <!-- Course Container -->
          <div class="jumbotron">
-            <!-- Groups Container -->
-            <div ng-controller="panelCtrl as panel">
-               <ul class="nav nav-pills">
-                 <li role="presentation" ng-class="{active:panel.isSet(1)}"><a href ng-click="panel.setPanel(1)">Курс ІБ</a></li>
-                 <li role="presentation" ng-class="{active:panel.isSet(2)}"><a href ng-click="panel.setPanel(2)">Курс ІІБ</a></li>
-                 <li role="presentation" ng-class="{active:panel.isSet(3)}"><a href ng-click="panel.setPanel(3)">Курс ІІІБ</a></li>
-                 <li role="presentation" ng-class="{active:panel.isSet(4)}"><a href ng-click="panel.setPanel(4)">Курс ІVБ</a></li>
-                 <li role="presentation" ng-class="{active:panel.isSet(5)}"><a href ng-click="panel.setPanel(5)">Курс ІC</a></li>
-                 <li role="presentation" ng-class="{active:panel.isSet(6)}"><a href ng-click="panel.setPanel(6)">Курс ІM</a></li>
+            <!-- Course Container -->
+            <div class="row">
+               <!-- Groups Container -->
+               <div ng-controller="panelCtrl as panel">
+                  <ul class="nav nav-pills">
+                    <li role="presentation" ng-class="{active:panel.isSet(1)}"><a href ng-click="panel.setPanel(1)">Курс ІБ</a></li>
+                    <li role="presentation" ng-class="{active:panel.isSet(2)}"><a href ng-click="panel.setPanel(2)">Курс ІІБ</a></li>
+                    <li role="presentation" ng-class="{active:panel.isSet(3)}"><a href ng-click="panel.setPanel(3)">Курс ІІІБ</a></li>
+                    <li role="presentation" ng-class="{active:panel.isSet(4)}"><a href ng-click="panel.setPanel(4)">Курс ІVБ</a></li>
+                    <li role="presentation" ng-class="{active:panel.isSet(5)}"><a href ng-click="panel.setPanel(5)">Курс ІC</a></li>
+                    <li role="presentation" ng-class="{active:panel.isSet(6)}"><a href ng-click="panel.setPanel(6)">Курс ІM</a></li>
+                  </ul>
+
+                  <div ng-show="panel.isSet(1)">
+                     <form class="form-group">
+                        <select ng-model="groupSelected" ng-options="group for group in schedule.squads[0].groups">
+                           <option value="">Виберіть групу</option>
+                        </select>
+                        <select ng-model="subgroup">
+                           <option value="">Виберіть підгрупу</option>
+                           <option value="subgroup1">І підгрупа</option>
+                           <option value="subgroup2">ІІ підгрупа</option>
+                        </select>
+                        <select ng-model="day">
+                           <option value="">Виберіть день тижня</option>
+                           <option value="mon">Понеділок</option>
+                           <option value="tue">Вівторок</option>
+                           <option value="wed">Середа</option>
+                           <option value="thu">Четвер</option>
+                           <option value="fri">П'ятниця</option>
+                        </select>
+                        <input type="button" value="Показати" ng-click="schedule.setTimetable(groupSelected, subgroup, day)">
+                     </form>
+                  </div>
+
+                  <div ng-show="panel.isSet(2)">
+                     <ul><li ng-repeat="group in schedule.squads[1].groups">{{group}}</li></ul>
+                  </div>
+
+                  <div ng-show="panel.isSet(3)">
+                     <ul><li ng-repeat="group in schedule.squads[2].groups">{{group}}</li></ul>
+                  </div>
+
+                  <div ng-show="panel.isSet(4)">
+                     <ul><li ng-repeat="group in schedule.squads[3].groups">{{group}}</li></ul>
+                  </div>
+
+                  <div ng-show="panel.isSet(5)">
+                     <ul><li ng-repeat="group in schedule.squads[4].groups">{{group}}</li></ul>
+                  </div>
+
+                  <div ng-show="panel.isSet(6)">
+                     <ul><li ng-repeat="group in schedule.squads[5].groups">{{group}}</li></ul>
+                  </div>
+               </div>
+            </div>
+            <!-- Course Container End -->
+         </div>
+         <div class="row" ng-show="schedule.timetable[0] === schedule.squads[0].groups[0] && schedule.timetable[1] === 'subgroup1' && schedule.timetable[2] === 'mon'">
+            <div class="col-xs-2">
+               <ul class="list-group">
+                 <li class="list-group-item list-group-item-info" ng-repeat="i in schedule.timetables.an11Bsubgroup1.monday">{{schedule.timetables.an11Bsubgroup1.monday.indexOf(i) + 1}} пара</li>
                </ul>
-
-               <div ng-show="panel.isSet(1)">
-                  <ul><li ng-repeat="group in schedule.squads[0].groups">{{group}}</li></ul>
-               </div>
-
-               <div ng-show="panel.isSet(2)">
-                  <ul><li ng-repeat="group in schedule.squads[1].groups">{{group}}</li></ul>
-               </div>
-
-               <div ng-show="panel.isSet(3)">
-                  <ul><li ng-repeat="group in schedule.squads[2].groups">{{group}}</li></ul>
-               </div>
-
-               <div ng-show="panel.isSet(4)">
-                  <ul><li ng-repeat="group in schedule.squads[3].groups">{{group}}</li></ul>
-               </div>
-
-               <div ng-show="panel.isSet(5)">
-                  <ul><li ng-repeat="group in schedule.squads[4].groups">{{group}}</li></ul>
-               </div>
-
-               <div ng-show="panel.isSet(6)">
-                  <ul><li ng-repeat="group in schedule.squads[5].groups">{{group}}</li></ul>
-               </div>
-
+            </div>
+            <div class="col-xs-10">
+               <ul class="list-group">
+                 <li class="list-group-item list-group-item-warning" ng-repeat="i in schedule.timetables.an11Bsubgroup1.monday">{{i}}</li>
+               </ul>
+            </div>
+         </div>
+         <div class="row" ng-show="schedule.timetable[0] === schedule.squads[0].groups[0] && schedule.timetable[1] === 'subgroup1' && schedule.timetable[2] === 'tue'">
+            <div class="col-xs-2">
+               <ul class="list-group">
+                 <li class="list-group-item list-group-item-info" ng-repeat="i in schedule.timetables.an11Bsubgroup1.tuesday">{{schedule.timetables.an11Bsubgroup1.tuesday.indexOf(i) + 1}} пара</li>
+               </ul>
+            </div>
+            <div class="col-xs-10">
+               <ul class="list-group">
+                 <li class="list-group-item list-group-item-warning" ng-repeat="i in schedule.timetables.an11Bsubgroup1.tuesday">{{i}}</li>
+               </ul>
+            </div>
+         </div>
+         <div class="row" ng-show="schedule.timetable[0] === schedule.squads[0].groups[0] && schedule.timetable[1] === 'subgroup2' && schedule.timetable[2] === 'mon'">
+            <div class="col-xs-2">
+               <ul class="list-group">
+                 <li class="list-group-item list-group-item-info" ng-repeat="i in schedule.timetables.an11Bsubgroup2.monday">{{schedule.timetables.an11Bsubgroup2.monday.indexOf(i) + 1}} пара</li>
+               </ul>
+            </div>
+            <div class="col-xs-10">
+               <ul class="list-group">
+                 <li class="list-group-item list-group-item-warning" ng-repeat="i in schedule.timetables.an11Bsubgroup2.monday">{{i}}</li>
+               </ul>
             </div>
          </div>
       </section>
